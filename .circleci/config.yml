@@ -130,8 +130,11 @@ jobs:
             # Your code here
             cd frontend
             npm install
+            # Don't use the --force option with the command below in your local
+            npm audit fix --audit-level=critical
             # npm install oauth-sign@^0.9.0
             npm audit --audit-level=critical
+            
       - save_cache:
           paths: [frontend/node_modules]
           key: scan-frontend  
@@ -153,6 +156,8 @@ jobs:
             # Your code here
             cd backend
             npm install
+            # Don't use the --force option with the command below in your local
+            npm audit fix --audit-level=critical
             # npm install oauth-sign@^0.9.0
             npm audit --audit-level=critical
       - save_cache:
