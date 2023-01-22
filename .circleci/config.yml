@@ -243,7 +243,7 @@ jobs:
       - checkout
       # Add ssh keys with fingerprint
       - add_ssh_keys:
-        fingerprints: ["a4:d4:76:90:e3:ec:43:3e:7e:23:76:22:4d:79:af:f4"]
+         fingerprints: ["a4:d4:76:90:e3:ec:43:3e:7e:23:76:22:4d:79:af:f4"]
     # attach workspace
       - attach_workspace:
           at: ~/
@@ -257,28 +257,28 @@ jobs:
           name: Configure server
           command: |
             # Your code here
-             cd .circleci/ansible
+            cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
       - destroy-environment
       # Here's where you will add some code to rollback on failure      
 
-  run-migrations:
-    docker:
-      # Docker image here that supports NodeJS
-    steps:
-      # Checkout code from git
-      - run:
-          name: Run migrations
-          command: |
-            # Your code here
-            exit 1
-      - run:
-          name: Send migration results to memstash
-          command: |
-            # Your code here
-            exit 1
-     # Here's where you will add some code to rollback on failure      
+  # run-migrations:
+  #   docker:
+  #     # Docker image here that supports NodeJS
+  #   steps:
+  #     # Checkout code from git
+  #     - run:
+  #         name: Run migrations
+  #         command: |
+  #           # Your code here
+  #           exit 1
+  #     - run:
+  #         name: Send migration results to memstash
+  #         command: |
+  #           # Your code here
+  #           exit 1
+  #    # Here's where you will add some code to rollback on failure      
 
 #   deploy-frontend:
 #     docker:
