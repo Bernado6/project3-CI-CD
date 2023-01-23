@@ -302,7 +302,6 @@ jobs:
       # Checkout code from git
       - checkout
       - install_awscli
-      - install_ansible
       - install_nodejs
       - run:
           name: Install dependencies
@@ -319,7 +318,12 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
             echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
-            cat frontend/.env
+            echo $(cat frontend/.env)
+
+      - persist_to_workspace:
+            root: ~/
+            paths:
+              - project/frontend/.env
       - run:
           name: Deploy frontend objects
           command: |
