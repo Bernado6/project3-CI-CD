@@ -4,25 +4,28 @@
     path: ~/backend_app
     state: directory
 
-- name: "Copy compiled backend app"
-  copy:
-    src: dist.zip
-    dest: "~/backend_app/dist.zip"
+- name: "Unarchive backend files"
+  unarchive:
+    src: artifact.tar.gzp
+    dest: ~/backend_app
 
-- name: "Unzip backend files to correct directory"
-  shell: |
-    cd ~/backend_app
-    unzip dist.zip
-    rm -rf dist.zip
 - name: "Install dependencies for project"
   shell: |
     cd ~/backend_app
     npm install
 - name: "Executing node with PM2"
   shell: |
-    export
-    cd ~/backend_app
+    cd ~/backend_app/dist
+
+    cd ../
+    npm install
+    npm build
+    
+    sudo npm install forever -g
+    sudo npm install ts-node -g
+    forever start -c "ts-node   -r tsconfig-paths/register -r dotenv/config src/main.ts" ./
     pm2 start main.js
+    
   register: execute_node
 
 - name: print message
@@ -30,5 +33,6 @@
     msg: "{{ execute_node.stdout_lines }}"
 
 - name: "Configure pm2 to start as service"
+  become: true
   shell: |
-    env PATH=$PATH:/usr/local/bin pm2 startup -u ubuntu
+    env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
