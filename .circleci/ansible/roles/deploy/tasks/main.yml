@@ -7,7 +7,7 @@
 - name: "Unarchive backend files"
   unarchive:
     src: artifact.tar.gzp
-    dest: ~/backend_app
+    dest: .
 
 - name: "Install dependencies for project"
   shell: |
