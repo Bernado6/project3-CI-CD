@@ -192,6 +192,8 @@ jobs:
             npm install
             # Don't use the --force option with the command below in your local
             npm audit fix --audit-level=critical --force
+            npm audit fix --audit-level=critical --force
+            npm audit --audit-level=critical
       - save_cache:
           paths: [backend/node_modules]
           key: scan-backend
