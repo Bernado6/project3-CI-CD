@@ -435,7 +435,7 @@ jobs:
   cloudfront-update:
     docker:
       # Docker image here that supports AWS CLI
-      - image: cimg/base:stable
+      - image: amazon/aws-cli
     steps:
       # Checkout code from git
       - checkout
@@ -449,6 +449,7 @@ jobs:
                       --no-paginate --output text)
             echo "Old Wokflow ID: $OLD_WORKFLOW_ID"
             curl https://kvdb.io/5ka1vYVxGkaLBLXFWXeB75/old_workflow_id -d "${OLD_WORKFLOW_ID}"
+            
       - run:
           name: Update cloudfront distribution
           command: |
