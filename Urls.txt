@@ -4,4 +4,4 @@ https://github.com/Bernado6/project3-CI-CD
 
 2. URL01: Public URL for your S3 Bucket(green candidate front-end) link
 
-http://udapeople-004dfbb.s3-website-us-east-1.amazonaws.com
+http://udapeople-25fd1c0.s3-website-us-east-1.amazonaws.com
